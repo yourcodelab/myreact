@@ -22,12 +22,21 @@ class CustomerList extends Component {
 
   render() {
     const listCustomers = this.state.customers;
-    const tableCustomers = listCustomers.map(customer => (
-      <tr key={customer.id}>
-        <td>{customer.firstname}</td>
-        <td>{customer.lastname}</td>
-      </tr>
-    ));
+
+    if (listCustomers == null)
+      this.tableCustomers = (
+        <tr>
+          <td>No results</td>
+        </tr>
+      );
+    else {
+      this.tableCustomers = listCustomers.map(customer => (
+        <tr key={customer.id}>
+          <td>{customer.firstname}</td>
+          <td>{customer.lastname}</td>
+        </tr>
+      ));
+    }
 
     return (
       <div className="CustomerList">
@@ -39,7 +48,7 @@ class CustomerList extends Component {
               <th>Last Name</th>
             </tr>
           </thead>
-          <tbody>{tableCustomers}</tbody>
+          <tbody>{this.tableCustomers}</tbody>
         </table>
       </div>
     );

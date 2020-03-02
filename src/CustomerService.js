@@ -1,13 +1,29 @@
 class CustomerService {
   constructor() {
-    this.customers = [
-      { id: 1, firstname: "Alex", lastname: "Siqueira" },
-      { id: 2, firstname: "Pietro", lastname: "Benetti" }
-    ];
+    this.urlservice =
+      "https://raw.githubusercontent.com/yourcodelab/myreact/master/public/customers.json";
   }
 
   async listAll() {
-    return Promise.resolve(this.customers);
+    return fetch(this.urlservice)
+      .then(response => {
+        if (!response.ok) {
+          this.handleResponseError(response);
+        }
+
+        return response.json();
+      })
+      .catch(error => {
+        this.handleError(error);
+      });
+  }
+
+  handleResponseError(response) {
+    throw new Error("HTTP error, status = " + response.status);
+  }
+
+  handleError(error) {
+    console.log(error.message);
   }
 }
 
