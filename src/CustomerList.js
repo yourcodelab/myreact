@@ -32,8 +32,8 @@ class CustomerList extends Component {
     else {
       this.tableCustomers = listCustomers.map(customer => (
         <tr key={customer.id}>
-          <td>{customer.firstname}</td>
-          <td>{customer.lastname}</td>
+          <td>{customer.data.firstname}</td>
+          <td>{customer.data.lastname}</td>
         </tr>
       ));
     }

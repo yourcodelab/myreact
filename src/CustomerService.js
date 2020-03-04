@@ -1,17 +1,21 @@
 class CustomerService {
   constructor() {
     this.urlservice =
-      "https://raw.githubusercontent.com/yourcodelab/myreact/master/public/customers.json";
+      "https://my-firebase-api-001.firebaseapp.com/api/v1/customers";
+
+    //  "https://api.github.com/search/repositories?q=stars:>1+language:javascript&sort=stars&order=desc&type=Repositories";
   }
 
   async listAll() {
-    return fetch(this.urlservice)
+    return await fetch(this.urlservice)
       .then(response => {
         if (!response.ok) {
           this.handleResponseError(response);
         }
-
         return response.json();
+      })
+      .then(json => {
+        console.log("JSON = " + json);
       })
       .catch(error => {
         this.handleError(error);
