@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import CustomerService from "./CustomerService";
 
 class CustomerCreate extends Component {
-
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.service = new CustomerService();
     this.handleInputChange = this.handleInputChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -18,9 +17,16 @@ class CustomerCreate extends Component {
 
   onSubmit() {
     this.service.insert(this.state);
+    this.cleanState();
+    this.props.close();
   }
 
   onCancel() {
+    this.cleanState();
+    this.props.close();
+  }
+
+  cleanState() {
     this.setState({
       id: 0,
       firstname: "",
